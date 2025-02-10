@@ -1,17 +1,17 @@
 <script setup>
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap'
+import Pagination from '@/Components/pagination.vue';
+import { usePage } from '@inertiajs/vue3';
 const props =defineProps({
     students: {
         type: Object,
         required: true
-    }
-    
+    }  
 });
 
 console.log(props.students);
 </script>
-
 <template>
     <div class="container mt-4">
         <!-- Header Section -->
@@ -65,6 +65,7 @@ console.log(props.students);
                     </tbody>
                 </table>
             </div>
+            <Pagination :data="students"/>
         </div>
     </div>
 </template>
