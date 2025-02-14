@@ -1,8 +1,9 @@
 <script setup>
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap'
-import Pagination from '@/Components/pagination.vue';
-import { usePage } from '@inertiajs/vue3';
+import Pagination from '@/Components/Pagination.vue';
+import { Link } from '@inertiajs/vue3';
+
 const props =defineProps({
     students: {
         type: Object,
@@ -17,9 +18,9 @@ console.log(props.students);
         <!-- Header Section -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1>Liste des Étudiants</h1>
-            <a href="/students/create" class="btn btn-primary">
+            <Link :href="route('students.create')" class="btn btn-primary">
                 Ajouter un étudiant
-            </a>
+            </Link>
         </div>
 
         <!-- Table Section -->

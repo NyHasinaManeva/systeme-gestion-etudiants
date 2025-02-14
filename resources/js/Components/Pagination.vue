@@ -9,7 +9,9 @@ import { router, usePage } from '@inertiajs/vue3';
     })
 const updatePageNumber = (link) =>{
     let pageNumber = link.url.split("=")[1]
-    router.visit('students?page='+ pageNumber)
+    router.visit('students?page='+ pageNumber,{
+        preserveScroll:true
+    })
 }
 </script>
 <template>
