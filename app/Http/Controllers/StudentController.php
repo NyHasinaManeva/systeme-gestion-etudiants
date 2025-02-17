@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreStudentRequest;
+use App\Http\Requests\UpdateStudentRequest;
 use App\Http\Resources\ClassesResource;
 use App\Http\Resources\StudentResource;
 use App\Models\Classes;
@@ -21,5 +23,21 @@ class StudentController extends Controller
         return inertia('students/Create',[
             'classes'=>$classes
         ]);
+    }
+    public function store(StoreStudentRequest $request){
+        Student::create($request->validated());
+        return redirect()->route('students.index');
+    }
+    public function edit(Student $student){
+        $classes = ClassesResource::collection(Classes::all());
+        
+        return inertia('students/Edit',[
+            'classes'=>$classes,
+            'student'=>StudentResource::make($student)
+        ]);
+    }
+    public function Update(UpdateStudentRequest $request,Student $student){
+        $student->update($request->validated());
+        return redirect()->route('students.index');
     }
 }
