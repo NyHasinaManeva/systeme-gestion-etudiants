@@ -2,8 +2,9 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap'
 import Pagination from '@/Components/Pagination.vue';
-import { Link } from '@inertiajs/vue3';
+import { Link, useForm } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import axios from 'axios';
 
 const props =defineProps({
     students: {
@@ -11,8 +12,14 @@ const props =defineProps({
         required: true
     }  
 });
-
-console.log(props.students);
+const formdelete= useForm({})
+const deleteStudent=(student_id)=>{
+    console.log(student_id)
+    console.log(formdelete)
+    if (confirm("Are you sure you want to delete this student?")) {
+        formdelete.delete(route("students.destroy",student_id))
+    }
+}
 </script>
 <template>
     <AuthenticatedLayout>
@@ -63,12 +70,12 @@ console.log(props.students);
                                         >
                                             Modifier
                                         </Link>
-                                        <Link 
-                                            href="#"
+                                        <button 
+                                            @click="deleteStudent(student.id)"
                                             class="btn btn-sm btn-danger"
                                         >
                                             Supprimer
-                                        </Link>
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
